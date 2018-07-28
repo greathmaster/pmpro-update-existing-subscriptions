@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Paid Memberships Pro - Update Existing Subscriptions
+Plugin Name: Paid Memberships Pro - Update Existing Subscriptions(Custom Version)
 Plugin URI: http://www.paidmembershipspro.com/wp/update-existing-subscriptsions/
-Description: Interface to update the details of existing subscriptions.
+Description: Interface to update the details of existing subscriptions. Custom version - when canceling at the gateway maintains the local membership.
 Version: .2
 Author: Stranger Studios
 Author URI: http://www.strangerstudios.com
@@ -428,7 +428,7 @@ function pmproues_wp_ajax() {
                 if (!empty($subscription)) {
                     $end_timestamp = $subscription->current_period_end;
                     //cancel the old subscription
-                    if (!$order->Gateway->cancelSubscriptionAtGateway($subscription)) {
+                    if (!$order->Gateway->cancelSubscriptionAtGateway($subscription, true)) {
                         echo "Could not cancel the old subscription. Skipping. ";
                         continue;
                     }
